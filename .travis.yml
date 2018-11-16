@@ -1,0 +1,20 @@
+sudo: required
+dist: trusty
+language: php
+
+#->versi php
+php : 
+  -7.1
+
+branches :
+  only:
+    -master #->qa/staging server
+    -develop #-> DevServer
+
+#-> install environment di OS
+before_install:
+
+# precompile
+before_script
+# Main execution (build)
+script:
