@@ -14,10 +14,19 @@ branches :
 #-> install environment di OS
 before_install:
 # - curl -sSfL -o ~/.phpenv/versions/hhvm/bin/phpunit https://phar.phpunit.de/phpunit-5.7.phar
-- curl -LO https://storage.googleapis.com/kubernetes-release/release/$(curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt)/bin/linux/amd64/kubectl
-- chmod +x ./kubectl #permission
-- sudo mv ./kubectl /usr/local/bin/kubectl
-# precompile
+# - curl -LO https://storage.googleapis.com/kubernetes-release/release/
+# $(curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt)
+# /bin/linux/amd64/kubectl
+# - chmod +x ./kubectl #permission
+# - sudo mv ./kubectl /usr/local/bin/kubectl
+
+# build
 before_script:
-# Main execution (build)
+  - cp .env.travis .env
+  - composer install --no-interaction
+  - php artisan key:generate
+# Test
 script:
+
+#deploy
+after_succes:
